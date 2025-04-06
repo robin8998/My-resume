@@ -25,7 +25,7 @@ function Header() {
             isCurrent : currentItem
         },
     ]
-
+    
     const currentSection = (item) =>{    // to highlight the current section in navbar 
      navigate(item.slug)    
      setCurrentItem(item.name)
