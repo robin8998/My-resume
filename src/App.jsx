@@ -1,13 +1,20 @@
 import { useState } from 'react'
 import './App.css'
+import { Outlet } from 'react-router-dom'
+import Header from './header/Header'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-     <h1>My resume </h1>
-    </>
+    <div>
+      <div>
+        <Header/>
+        <main>
+          <Outlet/>
+        </main>
+      </div>
+    </div>
   )
 }
 
