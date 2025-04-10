@@ -1,6 +1,6 @@
 import React from 'react'
 
-function about() {
+function About() {
   return (
     <div>
         <div id='about'>
@@ -19,4 +19,4 @@ I’m excited to collaborate, contribute, and grow in the tech space. Let’s bu
   )
 }
 
-export default about
+export default About
