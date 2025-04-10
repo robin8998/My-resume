@@ -14,7 +14,7 @@ Currently, I’m diving deeper into responsive design, UI/UX principles, and bac
 I’m excited to collaborate, contribute, and grow in the tech space. Let’s build something amazing together!
             </p>
         </div>
-        <div><img src="" alt="my-pic" /></div>
+        <div><img src='/images/myPhoto.jpg' alt="my-pic" /></div>
     </div>
   )
 }
