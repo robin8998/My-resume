@@ -3,15 +3,28 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { About,Contact,Projects,Resume } from './components/index.js'
 
-const router = createBrowserRouter([
+const routes = createBrowserRouter([
   {
     path: "/",
     element : <App/>,
     children : [
       {
         path : "/",
-        element : <about/>
+        element : <About/>
+      },
+      {
+        path : "/contact",
+        element : <Contact/>
+      },
+      {
+        path : "/projects",
+        element: <Projects/>
+      },
+      {
+        path: "/resume",
+        element : <Resume/>
       }
     ]
   }
@@ -19,6 +32,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <RouterProvider router={routes}>
     <App />
+    </RouterProvider>
   </StrictMode>,
 )
