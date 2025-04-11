@@ -3,7 +3,6 @@ import {pdfjs} from "react-pdf"
 import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css';
-import resume from "../../pdf/resume.pdf"
 
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -21,7 +20,7 @@ function Resume() {
   
     return (
       <div>
-        <Document file={resume} onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file="/pdf/resume.pdf" onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber} />
         </Document>
         <p>
