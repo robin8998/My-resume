@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Terminal, Coffee, Monitor, Sparkles } from 'lucide-react';
+import { Code, Terminal, Coffee, Monitor, Sparkles, FileJson, Database } from 'lucide-react';
 
 function About() {
   // Animation variants
@@ -27,7 +27,9 @@ function About() {
   // Skills with icons
   const skills = [
     { name: "Frontend Development", icon: <Monitor className="w-5 h-5" /> },
+    { name: "JavaScript", icon: <FileJson className="w-5 h-5" /> },
     { name: "React & Redux", icon: <Code className="w-5 h-5" /> },
+    { name: "Appwrite", icon: <Database className="w-5 h-5" /> },
     { name: "UI/UX Design", icon: <Sparkles className="w-5 h-5" /> },
     { name: "Problem Solving", icon: <Terminal className="w-5 h-5" /> },
     { name: "Continuous Learning", icon: <Coffee className="w-5 h-5" /> }
@@ -186,7 +188,7 @@ function About() {
                   key={i}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ 
-                    opacity: 1, 
+                    opacity: 1,
                     scale: 1,
                     rotate: i % 2 === 0 ? 0 : 45
                   }}
