@@ -1,17 +1,18 @@
 import { useState } from 'react'
-import './App.css'
 import { Outlet } from 'react-router-dom'
 import Header from './components/header/Header'
+import { About, Contact, Projects, Resume } from './components'
 
 function App() {
   
-
   return (
     <div>
       <div>
         <Header/>
         <main>
-          <Outlet/>
+          <About/>
+          <Projects/>
+          <Contact/>
         </main>
       </div>
     </div>
