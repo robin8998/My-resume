@@ -30,7 +30,11 @@ function Header() {
   }, [])
 
   const currentSection = (item) => {
-    navigate(item.slug)
+    if (item.name === "Resume") {
+      window.open("/pdf/resume.pdf", "_blank") // Open PDF in new tab
+    } else {
+      navigate(item.slug)
+    }
     setCurrentItem(item.name)
     setIsOpen(false)
   }
