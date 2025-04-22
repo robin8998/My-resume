@@ -1,253 +1,256 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { Menu, X, ChevronRight, Code, User, Mail, Grid } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Menu, X, ChevronRight, Code, User, Mail, Grid, ExternalLink } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 function Header() {
-  const [currentItem, setCurrentItem] = useState("Home")
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const navigate = useNavigate()
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const headerRef = useRef(null);
+  const logoRef = useRef(null);
+  const navRef = useRef(null);
 
   const navItems = [
-    { name: "Resume", slug: "/resume", icon: <User className="w-4 h-4" /> },
+    { name: "About", slug: "/", icon: <User className="w-4 h-4" /> },
     { name: "Projects", slug: "/projects", icon: <Code className="w-4 h-4" /> },
+    { name: "Resume", slug: "/resume", icon: <Grid className="w-4 h-4" /> },
     { name: "Contact", slug: "/contact", icon: <Mail className="w-4 h-4" /> },
-  ]
+  ];
 
-  // Handle scroll effect for header
+  // Check if the current route matches the nav item
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
+  // GSAP animations setup
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
+    // Initial animation for header elements
+    const tl = gsap.timeline();
+    
+    tl.fromTo(
+      logoRef.current,
+      { y: -50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    );
+    
+    tl.fromTo(
+      navRef.current.children,
+      { y: -30, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.5, 
+        ease: "power2.out" 
+      },
+      "-=0.4"
+    );
+
+    // Header scroll effect
+    ScrollTrigger.create({
+      start: "top top",
+      end: "max",
+      onUpdate: (self) => {
+        if (self.progress > 0.05) {
+          setScrolled(true);
+          gsap.to(headerRef.current, {
+            backgroundColor: "rgba(10, 10, 40, 0.95)",
+            backdropFilter: "blur(10px)",
+            boxShadow: "0 10px 30px -10px rgba(2, 12, 27, 0.15)",
+            padding: "0.75rem 0",
+            duration: 0.3
+          });
+        } else {
+          setScrolled(false);
+          gsap.to(headerRef.current, {
+            backgroundColor: "rgba(10, 10, 40, 0.7)",
+            backdropFilter: "blur(5px)",
+            boxShadow: "none",
+            padding: "1.25rem 0",
+            duration: 0.3
+          });
+        }
       }
-    }
+    });
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
-  const currentSection = (item) => {
+  // Handle navigation
+  const handleNavigation = (item) => {
     if (item.name === "Resume") {
-      window.open("/pdf/resume.pdf", "_blank") // Open PDF in new tab
+      window.open("/pdf/resume.pdf", "_blank");
     } else {
-      navigate(item.slug)
+      navigate(item.slug);
+      setIsOpen(false);
     }
-    setCurrentItem(item.name)
-    setIsOpen(false)
-  }
+  };
 
-  const headerVariants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeInOut" } }
-  }
+  // Logo hover animation
+  const handleLogoHover = () => {
+    gsap.to(".logo-pixel", {
+      scale: (i) => 1.2 + (i % 3) * 0.2,
+      stagger: 0.05,
+      duration: 0.4,
+      ease: "power2.out"
+    });
+  };
 
-  const logoVariants = {
-    initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.6 } },
-    hover: { scale: 1.05, transition: { duration: 0.2 } }
-  }
-
-  const navItemVariants = {
-    initial: { opacity: 0, y: -10 },
-    animate: (index) => ({ opacity: 1, y: 0, transition: { duration: 0.4, delay: index * 0.1 } }),
-    hover: { scale: 1.1, transition: { duration: 0.2 } }
-  }
-
-  // Individual pixel animation for the logo
-  const pixelVariants = {
-    initial: { opacity: 0, scale: 0 },
-    animate: (i) => ({ 
-      opacity: 1, 
+  const handleLogoLeave = () => {
+    gsap.to(".logo-pixel", {
       scale: 1,
-      transition: { delay: i * 0.05, duration: 0.3 }
-    }),
-    hover: (i) => ({
-      y: Math.sin(i) * 5,
-      transition: { 
-        repeat: Infinity, 
-        repeatType: "reverse", 
-        duration: 0.5 + (i * 0.1) % 0.5 
-      }
-    })
-  }
+      stagger: 0.03,
+      duration: 0.3,
+      ease: "power2.inOut"
+    });
+  };
 
-  // Pixel grid for logo
+  // Pixel logo component
   const PixelLogo = () => {
     const pixelColors = [
-      "bg-indigo-400", "bg-purple-400", "bg-indigo-300", 
-      "bg-purple-300", "bg-indigo-500", "bg-purple-500"
-    ]
+      "bg-teal-400", "bg-emerald-400", "bg-teal-300", 
+      "bg-sky-400", "bg-teal-500", "bg-emerald-500"
+    ];
     
     return (
       <div className="grid grid-cols-3 gap-0.5 mr-2">
         {[...Array(9)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
-            custom={i}
-            variants={pixelVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-            className={`w-2 h-2 rounded-sm ${i % 2 === 0 ? pixelColors[i % pixelColors.length] : "bg-transparent"}`}
+            className={`logo-pixel w-2 h-2 rounded-sm transition-all duration-200 ${
+              i % 2 === 0 ? pixelColors[i % pixelColors.length] : "bg-transparent"
+            }`}
           />
         ))}
       </div>
-    )
-  }
+    );
+  };
 
   return (
-    <motion.header
-      variants={headerVariants}
-      initial="hidden"
-      animate="visible"
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+    <header
+      ref={headerRef}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? "bg-gradient-to-r from-indigo-900/90 to-purple-800/90 backdrop-blur-lg shadow-xl py-3" 
-          : "bg-gradient-to-r from-indigo-700/80 to-purple-600/80 backdrop-blur-md py-5"
+          ? "py-3 bg-slate-900/95 backdrop-blur-lg shadow-lg" 
+          : "py-5 bg-slate-900/70 backdrop-blur-md"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <motion.div
-            variants={logoVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
+          <div
+            ref={logoRef}
             className="text-xl font-bold text-white cursor-pointer flex items-center"
             onClick={() => {
               navigate("/")
-              setCurrentItem("Home")
+              setIsOpen(false)
             }}
+            onMouseEnter={handleLogoHover}
+            onMouseLeave={handleLogoLeave}
           >
             <div className="flex items-center">
               <PixelLogo />
               <div className="flex items-baseline">
-                <span className="text-cyan-300 mr-1">Pixel</span>
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-200">Perfect</span>
+                <span className="text-teal-400 mr-1">Pixel</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-emerald-200">Perfect</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav ref={navRef} className="hidden md:flex items-center space-x-6">
             {navItems.map((item, index) => (
-              <motion.button
+              <button
                 key={item.slug}
-                custom={index}
-                variants={navItemVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-                onClick={() => currentSection(item)}
+                onClick={() => handleNavigation(item)}
                 className="group relative"
               >
                 <div className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                  currentItem === item.name 
-                    ? "bg-white/20 text-white" 
-                    : "text-gray-100 hover:bg-white/10"
+                  isActive(item.slug) 
+                    ? "bg-teal-400/20 text-teal-400" 
+                    : "text-gray-300 hover:text-teal-400 hover:bg-teal-400/10"
                 }`}>
                   {item.icon}
                   <span className="text-sm font-medium">{item.name}</span>
                 </div>
-                {currentItem === item.name && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute -bottom-1 left-0 right-0 mx-auto w-12 h-1 bg-cyan-300 rounded-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
+                {isActive(item.slug) && (
+                  <div
+                    className="absolute -bottom-1 left-0 right-0 mx-auto w-12 h-1 bg-teal-400 rounded-full"
                   />
                 )}
-              </motion.button>
+              </button>
             ))}
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-              className="ml-2 px-5 py-2 bg-cyan-400 text-indigo-900 font-semibold rounded-full shadow-lg shadow-indigo-900/20 hover:bg-cyan-300 transition-all duration-300"
+            <button
+              onClick={() => window.open("mailto:robinsr889@gmail.com", "_blank")}
+              className="ml-2 px-5 py-2 bg-teal-500 text-slate-900 font-semibold rounded-full shadow-lg shadow-teal-500/20 hover:bg-teal-400 transition-all duration-300 flex items-center gap-2"
             >
-              Hire Me
-            </motion.button>
+              <span>Hire Me</span>
+              <ExternalLink className="w-4 h-4" />
+            </button>
           </nav>
 
           {/* Mobile menu button */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="md:hidden"
-          >
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+          <div className="md:hidden">
+            <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors duration-200"
+              className="p-2 rounded-full bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 transition-colors duration-200"
               aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
-              <motion.div
-                initial={false}
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={{ duration: 0.3 }}
+              <div
+                className="transition-all duration-300"
+                style={{ transform: isOpen ? 'rotate(90deg)' : 'rotate(0)' }}
               >
                 {isOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
-              </motion.div>
-            </motion.button>
-          </motion.div>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="md:hidden bg-gradient-to-b from-indigo-900 to-purple-900 border-t border-indigo-500/30 shadow-2xl"
+      <div 
+        className={`md:hidden bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 overflow-hidden transition-all duration-300 ${
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-4 py-5 space-y-3">
+          {navItems.map((item, index) => (
+            <button
+              key={item.slug}
+              onClick={() => handleNavigation(item)}
+              className={`flex w-full items-center justify-between py-3 px-4 rounded-xl transition-all duration-200 ${
+                isActive(item.slug)
+                  ? "text-teal-400 bg-teal-400/10 shadow-inner"
+                  : "text-gray-300 hover:text-teal-400 hover:bg-teal-400/5"
+              }`}
+            >
+              <span className="flex items-center space-x-3">
+                <span className="bg-slate-800/80 p-2 rounded-lg">{item.icon}</span>
+                <span className="font-medium">{item.name}</span>
+              </span>
+              <ChevronRight className={`h-4 w-4 transition-transform ${isActive(item.slug) ? "text-teal-400" : ""}`} />
+            </button>
+          ))}
+          <button
+            onClick={() => window.open("mailto:robinsr889@gmail.com", "_blank")}
+            className="w-full mt-4 py-3 px-4 bg-teal-500 text-slate-900 font-semibold rounded-xl shadow-lg shadow-teal-500/20 hover:bg-teal-400 transition-all duration-300 flex items-center justify-center gap-2"
           >
-            <div className="px-4 py-5 space-y-3">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.slug}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  whileHover={{ x: 5 }}
-                  onClick={() => currentSection(item)}
-                  className={`flex w-full items-center justify-between py-3 px-4 rounded-xl ${
-                    currentItem === item.name
-                      ? "text-white bg-white/20 shadow-inner"
-                      : "text-gray-200 hover:text-white hover:bg-white/10"
-                  }`}
-                >
-                  <span className="flex items-center space-x-3">
-                    <span className="bg-indigo-500/30 p-2 rounded-lg">{item.icon}</span>
-                    <span className="font-medium">{item.name}</span>
-                  </span>
-                  <ChevronRight className={`h-4 w-4 transition-transform ${currentItem === item.name ? "text-cyan-300" : ""}`} />
-                </motion.button>
-              ))}
-              <motion.button
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.3 }}
-                className="w-full mt-4 py-3 px-4 bg-cyan-400 text-indigo-900 font-semibold rounded-xl shadow-lg shadow-indigo-900/20 hover:bg-cyan-300 transition-all duration-300"
-              >
-                Hire Me
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
-  )
+            <span>Hire Me</span>
+            <ExternalLink className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </header>
+  );
 }
 
-export default Header
+export default Header;
