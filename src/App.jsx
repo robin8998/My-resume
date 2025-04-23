@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './components/header/Header'
-import { About, Contact, Projects, Resume } from './components'
+import { About, Contact, Projects,  } from './components'
+import MyBg from './components/MyBg'
+import Myname from './components/Myname'
 
 function App() {
   
@@ -10,11 +12,12 @@ function App() {
       <div>
         <Header/>
         <main>
+          <MyBg/>
+          <Myname/>
           <About/>
           <Projects/>
           <Contact/>
         </main>
-        <Outlet/>
       </div>
     </div>
   )
