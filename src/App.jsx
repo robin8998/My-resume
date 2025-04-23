@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
 import Header from './components/header/Header'
 import { About, Contact, Projects,  } from './components'
 import MyBg from './components/MyBg'
