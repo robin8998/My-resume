@@ -38,7 +38,7 @@ function About() {
       <div className='flex w-full justify-center flex-col items-center px-12 my-16 space'>
 
         {/* title */}
-        <div className='text-2xl sticky top-1/6'>
+        <div className='text-2xl sticky top-1/6 bottom-0'>
         <h1 className=' font-Monoton tracking-[0.5em]'>About Me</h1>
         </div>
 
