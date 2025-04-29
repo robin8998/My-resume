@@ -54,7 +54,7 @@ function About() {
          I enjoy turning ideas into real-world projects and continuously learning to improve my skills.
          </div>
 
-         <div  id='card3' className='sticky top-[40%] bg-transparent mt-16 p-20 rounded-xl font-Kanit text-2xl'>
+         <div  id='card3' className='sticky top-[40%] bg-[#13161B] mt-16 p-20 rounded-xl font-Kanit text-2xl'>
          Currently, I'm diving deeper into responsive design, UI/UX principles, and backend integration to become a more well-rounded developer.
       When I'm not coding, you'll find me exploring design inspiration or learning something new in tech.
          </div>

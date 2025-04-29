@@ -3,7 +3,7 @@ import { Mail, Linkedin, Github } from "lucide-react";
 
 function Contact() {
   return (
-    <div className="w-full bg-gradient-to-r from-[#d5d2c8] to-gray-400 py-16 px-4 rounded-lg shadow-2xl">
+    <div className="w-full bg-gradient-to-r from-[#807e77] to-gray-500 py-16 px-4 rounded-lg shadow-2xl">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-Monoton font-bold text-white mb-8 tracking-[0.5em] sm:text-3xl md:text-4xl">
           Get In Touch

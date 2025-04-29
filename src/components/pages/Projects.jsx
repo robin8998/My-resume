@@ -141,7 +141,7 @@ function Projects() {
   }, [isMobile]) // Re-run when isMobile changes
 
   return (
-    <section id="projects" className="relative w-full bg-gradient-to-r from-[#d5d2c8] to-gray-400 pt-6 overflow-hidden">
+    <section id="projects" className="relative w-full bg-gradient-to-r from-[#807e77] to-gray-500 pt-6 overflow-hidden">
       {/* Title with its own pin behavior */}
       <div ref={headingRef} className="container mx-auto py-6 sm:py-8 md:py-12 px-4 z-10">
         <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl text-center font-Monoton tracking-[0.3em] md:tracking-[0.5em]">
