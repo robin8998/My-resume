@@ -1,18 +1,14 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import Header from './components/header/Header'
-import { About, Contact, Projects, Resume } from './components'
+
 
 function App() {
   
   return (
     <div>
-      <div>
-        <Header/>
+      <div className='overflow-hidden'>
         <main>
-          <About/>
-          <Projects/>
-          <Contact/>
+          <h1 className='text-white'>My portfolio</h1>
         </main>
       </div>
     </div>
