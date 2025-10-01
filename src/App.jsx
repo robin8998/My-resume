@@ -1,22 +1,10 @@
-import Header from './components/header/Header'
-import { About, Contact, Projects,  } from './components/index'
-import MyBg from './components/MyBg'
-import Myname from './components/Myname'
-import Skills from './components/pages/Skills'
 
 function App() {
     
   return (
-      <div>
-        <Header/>
+      <div clas4sName="bg-grey-100">
         <main>
-          <MyBg/>
-          <Myname/>
-          <About/>
-          <Skills/>
-          <Projects/>
-          <Skills/>
-          <Contact/>
+          <h1 className='text-black'>My portfolio</h1>
         </main>
       </div>
   )
