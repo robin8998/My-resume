@@ -8,10 +8,10 @@ import {
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
-} from "@/components/ui/resizable-navbar";
+} from "./components/ui/resizable-navbar";
 import { useState } from "react";
  
-export function NavbarDemo() {
+export function NavbarOrg() {
   const navItems = [
     {
       name: "Features",
@@ -85,7 +85,6 @@ export function NavbarDemo() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      <DummyContent />
  
       {/* Navbar */}
     </div>
