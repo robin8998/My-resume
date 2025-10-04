@@ -3,10 +3,10 @@ import { NavbarOrg } from "./Navbar"
 function App() {
     
   return (
-    <div className="bg-gray-600 w-full min-h-screen">
+    <div className="bg-gray-600">
         <NavbarOrg/>
         <main>
-          <h1 className='text-black'>My portfolio</h1>
+          <h1 className='text-black text-lg'>My portfolio</h1>
         </main>
       </div>
   )
