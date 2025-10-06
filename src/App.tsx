@@ -1,10 +1,10 @@
-import { NavbarOrg } from "./Navbar"
+import { Navbar} from "./Navbar"
 
 function App() {
     
   return (
     <div className="bg-gray-600">
-        <NavbarOrg/>
+        <Navbar/>
         <main>
           <h1 className='text-black text-lg'>My portfolio</h1>
         </main>
