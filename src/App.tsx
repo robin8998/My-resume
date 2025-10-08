@@ -1,5 +1,5 @@
 import { Navbar} from "./Navbar"
-import { MyPixalatedCanvas } from "./components/MyCanvas"
+import AboutMe from "./pages/about"
 
 function App() {
     
@@ -7,7 +7,7 @@ function App() {
     <div className="bg-gray-600">
         <Navbar/>
         <main>
-        <MyPixalatedCanvas/>
+          <AboutMe/>
         </main>
       </div>
   )
