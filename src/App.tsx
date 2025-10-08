@@ -4,7 +4,7 @@ import AboutMe from "./pages/about"
 function App() {
     
   return (
-    <div className="bg-gray-600">
+    <div className="bg-[#000]">
         <Navbar/>
         <main>
           <AboutMe/>
