@@ -1,3 +1,4 @@
+import TextRoller from "./components/ui/text-roller"
 import { Navbar} from "./Navbar"
 import AboutMe from "./pages/about"
 
@@ -8,6 +9,7 @@ function App() {
         <Navbar/>
         <main>
           <AboutMe/>
+          <TextRoller/>
         </main>
       </div>
   )
