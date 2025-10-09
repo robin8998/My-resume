@@ -1,10 +1,12 @@
-import { useEffect } from "react";
-import { createTimeline, stagger, splitText } from "animejs";
+import { useRef,useEffect } from "react";
+import { createTimeline, splitText, stagger } from "animejs";
 
-const TextRoller = () => {
+const TextRoller = ({ text = "HELLO WORLD" }) => {
+  const textRef = useRef(null);
+
   useEffect(() => {
-    // Step 1: Split the text
-    splitText("p", {
+    if (!textRef.current) return;
+    splitText(textRef.current, {
       chars: `<span class="char-3d word-{i}">
         <em class="face face-top">{value}</em>
         <em class="face face-front">{value}</em>
@@ -12,9 +14,7 @@ const TextRoller = () => {
       </span>`,
     });
 
-    // Step 2: Create the timeline
-    const charsStagger = stagger(1, { start: 0 });
-
+    const charsStagger = stagger(100, { start: 0 });
     createTimeline({
       defaults: { ease: "linear", loop: true, duration: 750 },
     })
@@ -26,7 +26,7 @@ const TextRoller = () => {
 
   return (
     <div className="text-container">
-      <p>HELLO WORLD</p>
+      <p ref={textRef}>{text}</p>
     </div>
   );
 };

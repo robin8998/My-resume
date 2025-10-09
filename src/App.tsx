@@ -1,6 +1,6 @@
-import TextRoller from "./components/ui/text-roller"
 import { Navbar} from "./Navbar"
 import AboutMe from "./pages/about"
+import Skills from "./pages/Skills"
 
 function App() {
     
@@ -9,7 +9,7 @@ function App() {
         <Navbar/>
         <main>
           <AboutMe/>
-          <TextRoller/>
+          <Skills/>
         </main>
       </div>
   )
