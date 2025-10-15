@@ -1,6 +1,5 @@
-import React from "react";
 import { InfiniteMovingIcons } from "@/components/ui/infinite-moving-cards";
-import { SiReact,SiNextdotjs } from "@icons-pack/react-simple-icons";
+import { SiReact,SiNextdotjs,SiTailwindcss,SiJavascript,SiAppwrite,SiMongodb,SiSocketdotio,} from "@icons-pack/react-simple-icons";
 
 function Skills() {
   const skills = [
@@ -13,8 +12,24 @@ function Skills() {
       name: "Next.js",
     },
     {
-      icon: <SiReact color="#61DAFB" size={40} title="React" />,
-      name: "React",
+      icon: <SiAppwrite color="#FD366E" size={40} title="Appwrite" />,
+      name: "Appwrite",
+    },
+    {
+      icon: <SiJavascript color="#F7DF1E" size={40} title="Javascript" />,
+      name: "Javascript",
+    },
+    {
+      icon: <SiMongodb color="#47A248" size={40} title="Mongodb" />,
+      name: "Mongodb",
+    },
+    {
+      icon: <SiTailwindcss color="#06B6D4" size={40} title="Tailwind" />,
+      name: "Tailwind",
+    },
+    {
+      icon: <SiSocketdotio color="#010101" size={40} title="Socket" />,
+      name: "Socket.io",
     },
   ];
 
@@ -26,7 +41,7 @@ function Skills() {
         <InfiniteMovingIcons
           items={skills}
           direction="right"
-          speed="fast"
+          speed="slow"
         />
       </div>
     </div>
