@@ -1,6 +1,7 @@
 import { Navbar} from "./Navbar"
 import AboutMe from "./pages/about"
 import Skills from "./pages/Skills"
+import Projects from "./pages/Projects"
 
 function App() {
     
@@ -10,6 +11,7 @@ function App() {
         <main>
           <AboutMe/>
           <Skills/>
+          <Projects/>
         </main>
       </div>
   )
