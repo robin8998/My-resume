@@ -62,11 +62,11 @@ export const InfiniteMovingIcons = ({
   const getSpeed = () => {
     if (containerRef.current) {
       if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "10s");
+        containerRef.current.style.setProperty("--animation-duration", "12s");
       } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
+        containerRef.current.style.setProperty("--animation-duration", "24s");
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "30s");
+        containerRef.current.style.setProperty("--animation-duration", "36s");
       }
     }
   };
@@ -92,10 +92,10 @@ export const InfiniteMovingIcons = ({
             className="relative shrink-0 flex flex-col items-center justify-center gap-2"
             key={`${item.name}-${idx}`}
           >
-            <div className="flex items-center justify-center w-16 h-16 rounded-lg bg-gray-100 dark:bg-zinc-800 transition-transform hover:scale-110">
+            <div className="flex items-center justify-center w-32 h-32 rounded-lg bg-gray-100 dark:bg-zinc-800 transition-transform hover:scale-110">
               {item.icon}
             </div>
-            <span className="text-xs sm:text-sm font-medium text-neutral-700 dark:text-gray-300 text-center whitespace-nowrap">
+            <span className="text-xl sm:text-xl font-medium text-neutral-600 dark:text-gray-300 text-center whitespace-nowrap">
               {item.name}
             </span>
           </li>
