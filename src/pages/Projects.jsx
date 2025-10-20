@@ -65,13 +65,19 @@ function Projects() {
   },
 ];
   return (
-    <div className='text-5xl text-white flex flex-col items-center'>
-    <h1>
+    <div className='text-5xl text-white flex flex-col items-center py-4'>
+    <h1 className="mb-4 ">
      My Projects
     </h1>
 
-    <div>
+    <div className="mt-28 p-4 flex flex-row justify-between w-full">
     <StickyScroll content={content} />
+    <h1 className="mx-2">Mini Blog</h1>
+    </div>
+    
+    <div className="mt-28 p-4 flex flex-row justify-between w-full">
+    <StickyScroll content={content} />
+    <h1 className="mx-2">Mini Blog</h1>
     </div>
     </div>
   )
