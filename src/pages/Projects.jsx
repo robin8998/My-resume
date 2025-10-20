@@ -5,7 +5,7 @@ function Projects() {
   {
     title: "Home Page",
     description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+      "A clean and responsive homepage designed to showcase announcements, featured posts, and essential information dynamically. Built using React, Tailwind CSS, it offers smooth,fast loading, and a welcoming first impression of the platform.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img 
@@ -20,7 +20,7 @@ function Projects() {
   {
     title: "Post View",
     description:
-      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+      "A detailed post view page where users can read full blog posts, view author information, and interact seamlessly. Optimized for readability with a structured layout and dynamic content fetching from Appwrite backend, ensuring real-time updates and responsive design.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img
@@ -36,7 +36,7 @@ function Projects() {
    {
     title: "Add Post",
     description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+      "A fully functional post creation interface that allows authenticated users to create and publish blogs instantly. Features include React Hook Form validation, image upload, and rich text inputs — streamlining the process of contributing new content with user-friendly controls.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img 
@@ -49,9 +49,9 @@ function Projects() {
     ),
   },
    {
-    title: "Home Page",
+    title: "Signup Page",
     description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+      "A secure and user-friendly signup page built with Appwrite authentication. It allows new users to register quickly and access personalized features. Includes proper error handling, responsive form fields, and modern UI styling consistent with the site’s overall design language.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img 
